@@ -36,7 +36,7 @@ public class StudentReport {
 
     private void printLongReport(Student student) {
         System.out.printf("Name: %s %s%n", student.getSurname(), student.getName());
-        System.out.printf("Working time: from %d to %d%n", Student.getSchoolDayStart(), Student.getSchoolDayEnd());
+        System.out.printf("Working time: from %d to %d%n", Student.getWorkingDayStart(), Student.getWorkingDayEnd());
         System.out.printf("Program name: %s%n", student.getCurriculum().getName());
         System.out.printf("Program duration: %d hours%n", student.getCurriculum().getDuration());
         System.out.printf("Start date: %s%n", Student.getCurriculumStartDate().format(DATE_FORMAT));

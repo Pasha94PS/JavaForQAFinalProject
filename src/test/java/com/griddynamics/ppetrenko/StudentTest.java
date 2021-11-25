@@ -150,6 +150,33 @@ public class StudentTest {
         assertEquals(parse("2021-11-18 14:00", FORMATTER), actual);
     }
 
+    @Test
+    public void verifyEndDateCalculationWhenCurriculumDurationIsMoreThanMonth() {
+        Student.setCurriculumStartDate("2021-11-18");
+        when(mockCurriculum.getDuration()).thenReturn(162);
+
+        LocalDateTime actual = student.getCurriculumEndDate();
+
+        assertEquals(parse("2021-12-16 12:00", FORMATTER), actual);
+    }
+
+    @Test
+    // This edge case includes following checks:
+    // - Start Date is 31 of December on Sunday
+    // - Curriculum duration is more than year
+    // - Curriculum lasts throughout the leap year
+    // - Curriculum end date is on Monday at 11:00
+    public void endDateCalculationEdgeCase() {
+        Student.setCurriculumStartDate("2023-12-31");
+        when(mockCurriculum.getDuration()).thenReturn(2121);
+
+        LocalDateTime actual = student.getCurriculumEndDate();
+
+        assertEquals(parse("2025-01-06 11:00", FORMATTER), actual);
+    }
+
+
+
     // Test for isCurriculumFinishedBoolean
     @Test
     public void isCurriculumFinishedIsFalseWhenOneSecondLeftToEndDate() {
